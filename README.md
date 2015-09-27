@@ -1,6 +1,6 @@
 # impala-udf-test
 
-udf for impala
+UDF examples for impala
 
 ## Build
 
@@ -10,16 +10,14 @@ cd impala-udf-test-debug
 cmake ../impala-udf-test && make
 ```
 
-## Add My UDF Functions
+## Add UDF Functions
 
 For Example:
 
 ```
 $ hdfs dfs -put -f libmyudf.so /tmp/
-$ impala-shell -i impala-host;
+$ impala-shell -i impalad-host;
 > create database myudfs;
 > use myudfs;
 > create function strcat(string, string...) returns string location '/tmp/libmyudf.so' Symbol='Concat';
 ```
-
-
