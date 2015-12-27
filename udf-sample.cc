@@ -22,12 +22,13 @@ StringVal Concat(FunctionContext* context, const StringVal& separator,
   if (len == 1) return args[0];
 
   const StringVal *p = args;
-  std::string str((const char*)p++->ptr);
+  std::string str((const char*)p->ptr, p->len);
+  p++;
 
   for (int i = 1; i < len; p++, i++) {
     if (p->is_null) return StringVal::null();
-    str.append((const char*)separator.ptr);
-    str.append((const char*)p->ptr);
+    str.append((const char*)separator.ptr, separator.len);
+    str.append((const char*)p->ptr, p->len);
   }
   StringVal result(context, str.size());
   memcpy(result.ptr, str.c_str(), str.size());
